@@ -1,0 +1,27 @@
+{
+  "aspect.name.berserk": "Berserk",
+  "aspect.name.leech": "Leech",
+  "aspect.name.creeper": "Creeper",
+  "aspect.name.stickybomb": "Sticky bomb",
+  "aspect.name.enderman": "Enderman",
+  "aspect.name.vengeance": "Vengeance",
+  "aspect.name.vampire": "Vampire",
+  "aspect.name.rider": "Rider",
+  "aspect.name.extralife": "Extra life",
+  "aspect.name.damagetransfer": "Damage transfer",
+  "aspect.name.glasscanon": "Glass canon",
+  "aspect.name.swap": "Swap",
+  "aspect.name.swift": "Swift",
+  "aspect.name.damagingeffects": "Damaging effects",
+  "aspect.name.debuff": "Debuff",
+  "aspect.name.heavy": "Heavy",
+  "aspect.name.siren": "Siren",
+  "aspect.name.stoic": "Stoic",
+  "aspect.name.ghastbuddy": "Ghast Buddy",
+  "aspect.name.undying_aura": "Undying Aura",
+  "aspect.name.berry": "Berry",
+
+  "entity.mobaspects.ghast_buddy": "Ghast Buddy",
+
+  "effect.mobaspects.undying": "Undying"
+}
