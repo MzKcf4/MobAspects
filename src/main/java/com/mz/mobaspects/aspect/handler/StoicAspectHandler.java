@@ -6,10 +6,11 @@ import net.minecraft.entity.MobEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
+import static com.mz.mobaspects.constants.CustomDamageSource.STOIC_DAMAGE_SOURCE;
+
 public class StoicAspectHandler implements IAspectHandler {
 
     public static String NBT_STOIC_DAMAGE_POOL = "STOIC_DAMAGE_POOL";
-    public static final DamageSource STOIC_DAMAGE_SOURCE = new DamageSource("stoicAspect");
 
     private float maxDamageCanTake = 8.0f;
     private int ticksPerTakeDamage = 20;

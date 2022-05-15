@@ -3,6 +3,7 @@ package com.mz.mobaspects.network.message;
 import com.mz.mobaspects.aspect.core.IAspectMob;
 import com.mz.mobaspects.capability.aspect.AspectCapabilityProvider;
 import com.mz.mobaspects.constants.AspectEnum;
+import com.mz.mobaspects.entity.OverloadCrystalEntity;
 import com.mz.mobaspects.entity.UndyingTotemAspectEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.world.ClientWorld;
@@ -66,6 +67,16 @@ public class EntityActionMessage {
                 return;
             }
             ((UndyingTotemAspectEntity)entity).setAuraActive(false);
+        } else if (EntityActionEnum.OVERLOAD_CRYSTAL_FUSE_OFF == message.entityActionEnum){
+            if(!(entity instanceof OverloadCrystalEntity)) {
+                return;
+            }
+            ((OverloadCrystalEntity)entity).setFused(false);
+        } else if (EntityActionEnum.OVERLOAD_CRYSTAL_FUSE_ON == message.entityActionEnum) {
+            if (!(entity instanceof OverloadCrystalEntity)) {
+                return;
+            }
+            ((OverloadCrystalEntity) entity).setFused(true);
         }
     }
 }

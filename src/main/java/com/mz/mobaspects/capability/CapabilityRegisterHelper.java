@@ -7,11 +7,11 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 
 // Implement ICapabilitySerializable<INBT> , because require store data persistently
-public class AspectCapabilityRegisterHelper {
+public class CapabilityRegisterHelper {
 
     public static void register() {
         CapabilityManager.INSTANCE.register(IAspectMob.class, new AspectStorage(), AspectMob::new);
-        MinecraftForge.EVENT_BUS.register(new AspectCapabilityEventHandler());
+        MinecraftForge.EVENT_BUS.register(new CapabilityEventHandler());
     }
 }
 

@@ -1,18 +1,9 @@
 package com.mz.mobaspects.aspect.goal;
 
 import com.mz.mobaspects.constants.ProjectileTypeEnum;
-import com.mz.mobaspects.util.Utils;
-import com.sun.media.sound.SF2InstrumentRegion;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FireballEntity;
-import net.minecraft.entity.projectile.SmallFireballEntity;
-import net.minecraft.util.SoundEvents;
-import net.minecraft.util.math.vector.Vector3d;
-
-import java.util.Collections;
-import java.util.List;
 
 public class ShootProjectileGoal extends UseAbilityGoal {
 

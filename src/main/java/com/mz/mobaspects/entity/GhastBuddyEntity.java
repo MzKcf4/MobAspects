@@ -15,54 +15,13 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
-public class GhastBuddyEntity extends Entity {
-
-    private MobEntity aspectOwner = null;
+public class GhastBuddyEntity extends AbstractAspectFollowerEntity {
 
     public GhastBuddyEntity(EntityType<?> entityTypeIn, World worldIn) {
         super(entityTypeIn, worldIn);
     }
 
-    public GhastBuddyEntity(World worldIn) {
-        super(CustomEntityRegister.GHAST_BUDDY.get(), worldIn);
-    }
-
-    public GhastBuddyEntity(World worldIn, double x, double y, double z , MobEntity aspectOwner) {
-        super(CustomEntityRegister.GHAST_BUDDY.get(), worldIn);
-        this.setPosition(x, y, z);
-        this.aspectOwner = aspectOwner;
-    }
-
-    @Override
-    protected void registerData() {
-
-    }
-
-    @Override
-    protected void readAdditional(CompoundNBT compound) {
-
-    }
-
-    @Override
-    protected void writeAdditional(CompoundNBT compound) {
-
-    }
-
-    @Override
-    public IPacket<?> createSpawnPacket() {
-        return NetworkHooks.getEntitySpawningPacket(this);
-    }
-
-    @Override
-    public void tick() {
-        if(!world.isRemote) {
-            if (aspectOwner == null || !aspectOwner.isAlive()) {
-                setDead();
-            } else {
-                this.setPosition(aspectOwner.getPosX(), aspectOwner.getPosY(), aspectOwner.getPosZ());
-                this.rotationYaw = aspectOwner.rotationYaw;
-            }
-        }
-        super.tick();
+    public GhastBuddyEntity(World worldIn, MobEntity aspectOwner) {
+        super(CustomEntityRegister.GHAST_BUDDY.get(), worldIn , aspectOwner);
     }
 }

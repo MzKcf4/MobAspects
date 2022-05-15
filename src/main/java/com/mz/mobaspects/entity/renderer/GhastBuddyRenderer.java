@@ -3,21 +3,15 @@ package com.mz.mobaspects.entity.renderer;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.mz.mobaspects.entity.GhastBuddyEntity;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.culling.ClippingHelper;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.model.GhastModel;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.data.ModelsResourceUtil;
-import net.minecraft.entity.monster.GhastEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.math.vector.Vector3f;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class GhastBuddyRenderer extends EntityRenderer<GhastBuddyEntity> {
     private static final ResourceLocation GHAST_TEXTURES = new ResourceLocation("textures/entity/ghast/ghast.png");
@@ -50,7 +44,6 @@ public class GhastBuddyRenderer extends EntityRenderer<GhastBuddyEntity> {
 
     @Override
     public ResourceLocation getEntityTexture(GhastBuddyEntity entity) {
-        // return entity.isAttacking() ? GHAST_SHOOTING_TEXTURES : GHAST_TEXTURES;
         return GHAST_TEXTURES;
     }
 }

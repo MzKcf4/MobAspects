@@ -35,6 +35,7 @@ public final class ServerConfig {
        allAspectList.add(new GlassCanonAspect());
        allAspectList.add(new HeavyAspect());
        allAspectList.add(new LeechAspect());
+       allAspectList.add(new OverloadAspect());
        allAspectList.add(new RiderAspect());
        allAspectList.add(new SirenAspect());
        allAspectList.add(new StickyBombAspect());
@@ -45,26 +46,27 @@ public final class ServerConfig {
        allAspectList.add(new VengenanceAspect());
        allAspectList.add(new UndyingAuraAspect());
 
-        BUILDER.push("mobaspects");
 
-        BUILDER.comment("Maximum aspects a mob can have (-1 = unlimited)");
-        MAX_ASPECT_COUNT = BUILDER.define("maxAspects" , MobAspectConstants.CONFIG_MAX_ASPECT_NO_LIMIT);
+       BUILDER.push("mobaspects");
 
-        BUILDER.comment("XP multiplier per aspect count");
-        XP_MULTIPLIER_PER_ASPECT = BUILDER.defineInRange("xpMultiplier" , 1.5D , 1.0D , Double.MAX_VALUE);
+       BUILDER.comment("Maximum aspects a mob can have (-1 = unlimited)");
+       MAX_ASPECT_COUNT = BUILDER.define("maxAspects" , MobAspectConstants.CONFIG_MAX_ASPECT_NO_LIMIT);
 
-        BUILDER.comment("Base chance for a mob to have at least 1 aspect ( e.g 0.5 = 50% )");
-        BASE_ASPECT_CHANCE = BUILDER.defineInRange("baseChance" , 0.5D , 0D , 1.0D);
+       BUILDER.comment("XP multiplier per aspect count");
+       XP_MULTIPLIER_PER_ASPECT = BUILDER.defineInRange("xpMultiplier" , 1.5D , 1.0D , Double.MAX_VALUE);
 
-        BUILDER.comment("The chance for a mob to have next aspect ( e.g chance of having 2 aspects = 0.5 base * 0.5 next  = 0.25 (25%)  )");
-        NEXT_ASPECT_CHANCE = BUILDER.defineInRange("nextChance" , 0.5D , 0D , 1.0D);
+       BUILDER.comment("Base chance for a mob to have at least 1 aspect ( e.g 0.5 = 50% )");
+       BASE_ASPECT_CHANCE = BUILDER.defineInRange("baseChance" , 0.5D , 0D , 1.0D);
 
-        for(AbstractAspect aspect : allAspectList){
-            aspect.buildConfig(BUILDER);
-        }
+       BUILDER.comment("The chance for a mob to have next aspect ( e.g chance of having 2 aspects = 0.5 base * 0.5 next  = 0.25 (25%)  )");
+       NEXT_ASPECT_CHANCE = BUILDER.defineInRange("nextChance" , 0.5D , 0D , 1.0D);
 
-        BUILDER.pop();
-        SPEC = BUILDER.build();
+       for(AbstractAspect aspect : allAspectList){
+           aspect.buildConfig(BUILDER);
+       }
+
+       BUILDER.pop();
+       SPEC = BUILDER.build();
 
     }
 

@@ -1,10 +1,11 @@
 package com.mz.mobaspects;
 
 import com.mz.mobaspects.aspect.core.AspectManager;
-import com.mz.mobaspects.capability.AspectCapabilityRegisterHelper;
+import com.mz.mobaspects.capability.CapabilityRegisterHelper;
 import com.mz.mobaspects.config.ServerConfig;
 import com.mz.mobaspects.entity.CustomEntityRegister;
 import com.mz.mobaspects.entity.renderer.GhastBuddyRenderer;
+import com.mz.mobaspects.entity.renderer.OverloadCrystalRenderer;
 import com.mz.mobaspects.entity.renderer.TotemOfUndyingRenderer;
 import com.mz.mobaspects.events.AspectEventHandler;
 import com.mz.mobaspects.events.gui.UiEventHandler;
@@ -53,8 +54,6 @@ public class MobAspects
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
-
-
     }
 
     // Setup both Server + Client
@@ -63,7 +62,7 @@ public class MobAspects
         AspectManager.INSTANCE.InitializeAspectList();
 
         NetworkHandler.init();
-        AspectCapabilityRegisterHelper.register();
+        CapabilityRegisterHelper.register();
         MinecraftForge.EVENT_BUS.register(new AspectEventHandler());
     }
 
@@ -75,6 +74,7 @@ public class MobAspects
 
         RenderingRegistry.registerEntityRenderingHandler(CustomEntityRegister.GHAST_BUDDY.get(), GhastBuddyRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(CustomEntityRegister.UNDYING_TOTEM.get(), TotemOfUndyingRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(CustomEntityRegister.OVERLOAD_CRYSTAL.get(), OverloadCrystalRenderer::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)

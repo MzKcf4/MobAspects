@@ -5,22 +5,17 @@ import com.mz.mobaspects.network.NetworkHandler;
 import com.mz.mobaspects.network.message.EntityActionEnum;
 import com.mz.mobaspects.network.message.EntityActionMessage;
 import com.mz.mobaspects.util.Utils;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.IPacket;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.fml.network.PacketDistributor;
 
 import java.util.List;
 
-public class UndyingTotemAspectEntity extends Entity {
+public class UndyingTotemAspectEntity extends AbstractAspectFollowerEntity {
 
-    private MobEntity aspectOwner = null;
     private int abilityNextUse = 120;
     private int abilityCooldown = 120;
 
@@ -31,20 +26,14 @@ public class UndyingTotemAspectEntity extends Entity {
     private float range = 5f;
 
     private boolean isAuraActive = false;
-    private boolean canUse = false;
+    private boolean forceActivated = false;
 
     public UndyingTotemAspectEntity(EntityType<?> entityTypeIn, World worldIn) {
         super(entityTypeIn, worldIn);
     }
 
-    public UndyingTotemAspectEntity(World worldIn) {
-        super(CustomEntityRegister.UNDYING_TOTEM.get(), worldIn);
-    }
-
     public UndyingTotemAspectEntity(World worldIn, MobEntity aspectOwner) {
-        super(CustomEntityRegister.UNDYING_TOTEM.get(), worldIn);
-        this.aspectOwner = aspectOwner;
-        stickToOwner();
+        super(CustomEntityRegister.UNDYING_TOTEM.get(), worldIn, aspectOwner);
     }
 
     public void setConfig(int abilityCooldown , int abilityDuration , int effectDuration , float range){
@@ -52,48 +41,26 @@ public class UndyingTotemAspectEntity extends Entity {
         this.abilityDuration = abilityDuration;
         this.effectDuration = effectDuration;
         this.range = range;
-
         this.abilityNextUse = abilityCooldown;
     }
 
     @Override
-    protected void registerData() {
-
+    protected void tickServer(){
+        checkAndUseAbility();
     }
 
-    @Override
-    protected void readAdditional(CompoundNBT compound) {
-
-    }
-
-    @Override
-    protected void writeAdditional(CompoundNBT compound) {
-
-    }
-
-    @Override
-    public IPacket<?> createSpawnPacket() {
-        return NetworkHooks.getEntitySpawningPacket(this);
-    }
-
-    @Override
-    public void tick() {
-        if(world.isRemote){
-            super.tick();
+    public void forceActivate(){
+        if(forceActivated){
             return;
         }
-
-        if (aspectOwner == null || !aspectOwner.isAlive()) {
-            setDead();
-        } else {
-            checkAndUseAbility();
-            stickToOwner();
-        }
-        super.tick();
+        forceActivated = true;
+        activateAura();
     }
 
-    private void stickToOwner(){
-        this.setPosition(aspectOwner.getPosX(), aspectOwner.getPosY(), aspectOwner.getPosZ());
+    public void activateAura(){
+        abilityDurationRemain = abilityDuration;
+        isAuraActive = true;
+        sendUpdateMessage(true);
     }
 
     private void checkAndUseAbility(){
@@ -111,10 +78,7 @@ public class UndyingTotemAspectEntity extends Entity {
                 abilityNextUse--;
                 return;
             }
-
-            abilityDurationRemain = abilityDuration;
-            isAuraActive = true;
-            sendUpdateMessage(true);
+            activateAura();
         }
     }
 

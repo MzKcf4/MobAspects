@@ -10,6 +10,7 @@ public class UndyingAuraAspect extends AbstractAspect {
     private ForgeConfigSpec.IntValue undyingAuraDuration;
     private ForgeConfigSpec.IntValue undyingAuraEffectDuration;
     private ForgeConfigSpec.DoubleValue undyingAuraRange;
+    private ForgeConfigSpec.DoubleValue undyingAuraForceUseBelowHealth;
 
     public UndyingAuraAspect(){
         super(new UndyingAuraAspectHandler());
@@ -17,7 +18,7 @@ public class UndyingAuraAspect extends AbstractAspect {
 
     @Override
     public void applyConfigToHandler() {
-        ((UndyingAuraAspectHandler)handler).setConfig(undyingAuraCooldown.get(), undyingAuraDuration.get() , undyingAuraEffectDuration.get() , undyingAuraRange.get().floatValue());
+        ((UndyingAuraAspectHandler)handler).setConfig(undyingAuraCooldown.get(), undyingAuraDuration.get() , undyingAuraEffectDuration.get() , undyingAuraRange.get().floatValue() , undyingAuraForceUseBelowHealth.get().floatValue());
     }
 
     @Override
@@ -33,6 +34,9 @@ public class UndyingAuraAspect extends AbstractAspect {
 
         builder.comment("How long the aura exists per activation (in ticks , normally 20 ticks = 1 second) ");
         this.undyingAuraDuration = builder.defineInRange("undyingAuraDuration" , 120 , 10 , Integer.MAX_VALUE);
+
+        builder.comment("Force to activate the aura once when falling below the specified health percentage");
+        this.undyingAuraForceUseBelowHealth = builder.defineInRange("undyingAuraForceUseBelowHealth" , 0.5D , 0.01D , 1.0D);
 
         builder.comment("Radius of the aura");
         this.undyingAuraRange = builder.defineInRange("undyingAuraRange" , 5f , 1f , 16f);

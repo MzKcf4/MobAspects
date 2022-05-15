@@ -2,14 +2,19 @@ package com.mz.mobaspects.util;
 
 import com.mz.mobaspects.capability.aspect.AspectCapabilityProvider;
 import com.mz.mobaspects.constants.AspectEnum;
+import com.mz.mobaspects.entity.AbstractAspectFollowerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.concurrent.ThreadTaskExecutor;
+import net.minecraft.util.concurrent.TickDelayedTask;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.LogicalSide;
+import net.minecraftforge.fml.LogicalSidedProvider;
 
 
 import java.util.*;
@@ -41,6 +46,20 @@ public class Utils {
         return mob.getCapability(AspectCapabilityProvider.ASPECT_CAPABILITY).filter(iAspectMob -> iAspectMob.getAspectCodeList().contains(aspect)).isPresent();
     }
 
+    public static void queueFollowerEntitySpawn(World world , AbstractAspectFollowerEntity followerEntity , MobEntity ownerEntity){
+        ThreadTaskExecutor<Runnable> executor = LogicalSidedProvider.WORKQUEUE.get(world.isRemote ? LogicalSide.CLIENT : LogicalSide.SERVER);
+
+        executor.enqueue(new TickDelayedTask(0, () -> {
+            world.addEntity(followerEntity);
+            ownerEntity.getCapability(AspectCapabilityProvider.ASPECT_CAPABILITY).ifPresent(extraInfo -> {
+                extraInfo.addAspectFollower(followerEntity);
+            });
+        }));
+    }
+
+    public static float getHealthPercentage(LivingEntity entity){
+        return entity.getHealth() / entity.getMaxHealth();
+    }
 
     /**
      * Drop an itemstack as entity

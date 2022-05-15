@@ -15,7 +15,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.network.PacketDistributor;
 
-public class AspectCapabilityEventHandler {
+public class CapabilityEventHandler {
 
     @SubscribeEvent
     public void attachCapabilities(final AttachCapabilitiesEvent<Entity> evt) {
@@ -26,6 +26,7 @@ public class AspectCapabilityEventHandler {
         //    which have the chance to return capabilities only from certain sides
         if (AspectManager.INSTANCE.canAttachAspect(entity)) {
             AspectCapabilityProvider provider = new AspectCapabilityProvider((LivingEntity) entity);
+
             evt.addCapability(new ResourceLocation(MobAspects.MOD_ID, "mobaspects"), provider);
 
             // When attached entities are removed , all attached providers should invalidate all of their held capability instances.

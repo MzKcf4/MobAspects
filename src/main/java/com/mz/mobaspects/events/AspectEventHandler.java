@@ -6,6 +6,7 @@ import com.mz.mobaspects.capability.aspect.AspectCapabilityProvider;
 import com.mz.mobaspects.config.ServerConfig;
 import com.mz.mobaspects.constants.AspectEnum;
 import com.mz.mobaspects.effects.CustomEffect;
+import com.mz.mobaspects.entity.AbstractAspectFollowerEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.monster.MonsterEntity;

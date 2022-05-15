@@ -25,5 +25,14 @@ public class  CustomEntityRegister {
                     .build(new ResourceLocation(MobAspects.MOD_ID, "undying_totem_aspect").toString())
     );
 
-    // UndyingTotemAspectEntity
+
+    public static final RegistryObject<EntityType<OverloadCrystalEntity>> OVERLOAD_CRYSTAL = ENTITY_TYPES.register("overload_crystal", () ->
+            EntityType.Builder.<OverloadCrystalEntity>create(OverloadCrystalEntity::new, EntityClassification.MISC)
+                    .size(1.0F, 1.0F)
+                    .immuneToFire()
+                    .build(new ResourceLocation(MobAspects.MOD_ID, "overload_crystal").toString())
+    );
+    
+    // OverloadCrystalEntity
+
 }

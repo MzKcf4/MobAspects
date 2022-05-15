@@ -3,6 +3,8 @@ package com.mz.mobaspects.aspect.goal;
 import com.mz.mobaspects.aspect.handler.StoicAspectHandler;
 import net.minecraft.entity.MobEntity;
 
+import static com.mz.mobaspects.constants.CustomDamageSource.STOIC_DAMAGE_SOURCE;
+
 public class StoicTakeDamageGoal extends UseAbilityGoal {
 
     private float maxDamage = 4.0f;
@@ -22,7 +24,7 @@ public class StoicTakeDamageGoal extends UseAbilityGoal {
         float damage = mobEntity.getPersistentData().getFloat(StoicAspectHandler.NBT_STOIC_DAMAGE_POOL);
         if(damage > 0.0f){
             float dmgToApply = Math.min(damage , maxDamage);
-            mobEntity.attackEntityFrom(StoicAspectHandler.STOIC_DAMAGE_SOURCE, dmgToApply);
+            mobEntity.attackEntityFrom(STOIC_DAMAGE_SOURCE, dmgToApply);
             damage -= dmgToApply;
             mobEntity.getPersistentData().putFloat(StoicAspectHandler.NBT_STOIC_DAMAGE_POOL, damage);
         }

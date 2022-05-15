@@ -24,7 +24,8 @@ public enum AspectEnum {
     STOIC(17, "stoic"),
     GHAST_BUDDY(18, "ghastbuddy"),
     BERRY(19, "berry"),
-    UNDYING_AURA(20, "undying_aura");
+    UNDYING_AURA(20, "undying_aura"),
+    OVERLOAD(21,"overload");
 
 
     private static final Map<Integer , AspectEnum> ID_TO_ENUM_MAP = new HashMap<>();
