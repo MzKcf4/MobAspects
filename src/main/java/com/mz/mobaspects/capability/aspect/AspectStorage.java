@@ -9,9 +9,7 @@ import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class AspectStorage implements Capability.IStorage<IAspectMob> {
@@ -21,7 +19,7 @@ public class AspectStorage implements Capability.IStorage<IAspectMob> {
     public INBT writeNBT(Capability<IAspectMob> capability, IAspectMob instance, Direction side) {
         CompoundNBT compoundNBT = new CompoundNBT();
 
-        List<AspectEnum> aspectCodeList = instance.getAspectCodeList();
+        Set<AspectEnum> aspectCodeList = instance.getAspectCodes();
         compoundNBT.putIntArray(MobAspectConstants.ATTRIBUTE_KEY , aspectEnumToId(aspectCodeList));
         return compoundNBT;
     }
@@ -31,17 +29,17 @@ public class AspectStorage implements Capability.IStorage<IAspectMob> {
         CompoundNBT compoundNBT = (CompoundNBT) nbt;
         if(compoundNBT.contains(MobAspectConstants.ATTRIBUTE_KEY)){
             int[] codeArray = compoundNBT.getIntArray(MobAspectConstants.ATTRIBUTE_KEY);
-            instance.setAspectCodeList(aspectIdToEnum(codeArray));
+            instance.setAspectCodes(aspectIdToEnum(codeArray));
         }
     }
 
-    private static List<Integer> aspectEnumToId(List<AspectEnum> aspectCodeList){
+    private static List<Integer> aspectEnumToId(Collection<AspectEnum> aspectCodeList){
         return aspectCodeList.stream().map(AspectEnum::getId).collect(Collectors.toList());
     }
 
-    private static List<AspectEnum> aspectIdToEnum(int[] aspectIdAry){
-        List<AspectEnum> result = new ArrayList<>();
-        Arrays.stream(aspectIdAry).forEach(id -> result.add(AspectEnum.fromId(id)));
-        return result;
+    private static Set<AspectEnum> aspectIdToEnum(int[] aspectIdAry){
+        return Arrays.stream(aspectIdAry)
+                .mapToObj(AspectEnum::fromId)
+                .collect(Collectors.toSet());
     }
 }

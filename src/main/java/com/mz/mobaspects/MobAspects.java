@@ -4,25 +4,27 @@ import com.mz.mobaspects.aspect.core.AspectManager;
 import com.mz.mobaspects.capability.CapabilityRegisterHelper;
 import com.mz.mobaspects.config.ServerConfig;
 import com.mz.mobaspects.entity.CustomEntityRegister;
+import com.mz.mobaspects.entity.ParasiteEntity;
 import com.mz.mobaspects.entity.renderer.GhastBuddyRenderer;
 import com.mz.mobaspects.entity.renderer.OverloadCrystalRenderer;
+import com.mz.mobaspects.entity.renderer.ParasiteRenderer;
 import com.mz.mobaspects.entity.renderer.TotemOfUndyingRenderer;
 import com.mz.mobaspects.events.AspectEventHandler;
 import com.mz.mobaspects.events.gui.UiEventHandler;
 import com.mz.mobaspects.network.NetworkHandler;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.entity.EndermiteRenderer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DeferredWorkQueue;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
+import net.minecraftforge.fml.event.lifecycle.*;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
@@ -75,6 +77,7 @@ public class MobAspects
         RenderingRegistry.registerEntityRenderingHandler(CustomEntityRegister.GHAST_BUDDY.get(), GhastBuddyRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(CustomEntityRegister.UNDYING_TOTEM.get(), TotemOfUndyingRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(CustomEntityRegister.OVERLOAD_CRYSTAL.get(), OverloadCrystalRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(CustomEntityRegister.ASPECT_PARASITE.get(), ParasiteRenderer::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -106,6 +109,11 @@ public class MobAspects
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
             // register a new block here
             // LOGGER.info("HELLO from Register Block");
+        }
+
+        @SubscribeEvent
+        public static void addEntityAttributes(EntityAttributeCreationEvent event){
+            event.put(CustomEntityRegister.ASPECT_PARASITE.get() , ParasiteEntity.getCustomAttributes().create());
         }
     }
 }

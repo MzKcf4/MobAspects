@@ -21,8 +21,10 @@
   "aspect.name.undying_aura": "Undying Aura",
   "aspect.name.berry": "Berry",
   "aspect.name.overload": "Overload",
+  "aspect.name.parasite": "Parasite",
 
   "entity.mobaspects.ghast_buddy": "Ghast Buddy",
+  "entity.mobaspects.aspect_parasite": "Aspect Parasite",
 
   "effect.mobaspects.undying": "Undying"
 }

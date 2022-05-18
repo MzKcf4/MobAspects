@@ -3,6 +3,7 @@ package com.mz.mobaspects.entity;
 import com.mz.mobaspects.MobAspects;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.monster.EndermiteEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -32,7 +33,11 @@ public class  CustomEntityRegister {
                     .immuneToFire()
                     .build(new ResourceLocation(MobAspects.MOD_ID, "overload_crystal").toString())
     );
-    
-    // OverloadCrystalEntity
 
+    public static final RegistryObject<EntityType<ParasiteEntity>> ASPECT_PARASITE = ENTITY_TYPES.register("aspect_parasite", () ->
+            EntityType.Builder.<ParasiteEntity>create(ParasiteEntity::new, EntityClassification.MONSTER)
+                    .size(0.4F, 0.3F)
+                    .trackingRange(8)
+                    .build(new ResourceLocation(MobAspects.MOD_ID, "aspect_parasite").toString())
+    );
 }

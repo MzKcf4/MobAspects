@@ -16,7 +16,7 @@ public class AspectManager {
     private HashMap<AspectEnum , AbstractAspect> availableAspectMap;
     private List<AspectEnum> enabledAspectEnumList;
 
-    private AspectManager(){};
+    private AspectManager(){}
 
     public void InitializeAspectList(){
         availableAspectMap = new HashMap<>();
@@ -35,23 +35,23 @@ public class AspectManager {
         return entity instanceof MonsterEntity;
     }
 
-    public List<AspectEnum> rollAspect(MobEntity entity){
+    public Set<AspectEnum> rollAspect(MobEntity entity){
         if(entity.getRNG().nextFloat() > ServerConfig.BASE_ASPECT_CHANCE.get().floatValue()){
-            return new ArrayList<>();
+            return new HashSet<>();
         }
 
-        List<AspectEnum> resultList = new ArrayList<>();
+        Set<AspectEnum> result = new HashSet<>();
         List<AspectEnum> clonedShuffleList = new ArrayList<>(enabledAspectEnumList);
         Collections.shuffle(clonedShuffleList);
 
         for (AspectEnum aspectEnum : clonedShuffleList) {
-            resultList.add(aspectEnum);
+            result.add(aspectEnum);
             if (entity.getRNG().nextFloat() > ServerConfig.NEXT_ASPECT_CHANCE.get().floatValue()) {
                 break;
             }
         }
 
-        return resultList;
+        return result;
     }
 
     public AbstractAspect getAspect(AspectEnum code){

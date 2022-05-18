@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public class EntityAttributeUtils {
 
-    private EntityAttributeUtils(){};
+    private EntityAttributeUtils(){}
 
     public static void ApplyAttributeModifier(LivingEntity entity, Attribute attribute , UUID modifierUUID ,
                                               float amount, AttributeModifier.Operation operation , String modifierDescription){
@@ -20,6 +20,15 @@ public class EntityAttributeUtils {
             }
             AttributeModifier speedModifier = createAttributeModifier(modifierUUID , amount , operation , modifierDescription);
             attr.applyNonPersistentModifier(speedModifier);
+        }
+    }
+
+    public static void removeAttributeModifier(LivingEntity entity, Attribute attribute , UUID modifierUUID){
+        ModifiableAttributeInstance attr = entity.getAttribute(attribute);
+        if(attr != null) {
+            if (attr.getModifier(modifierUUID) != null) {
+                attr.removeModifier(modifierUUID);
+            }
         }
     }
 

@@ -4,32 +4,29 @@ import com.mz.mobaspects.constants.AspectEnum;
 import com.mz.mobaspects.entity.AbstractAspectFollowerEntity;
 import net.minecraft.entity.LivingEntity;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 // The wrapper dto (capability) class for mobs with aspect.
 public class AspectMob implements IAspectMob {
     private LivingEntity entity;
-    private List<AspectEnum> aspectCodeList;
+    private Set<AspectEnum> aspectCodeList;
     private HashMap<Integer , AbstractAspectFollowerEntity> followerIdToEntityMap = new HashMap<>();
 
     public AspectMob(){}
 
     public AspectMob(LivingEntity entity) {
         this.entity = entity;
-        this.aspectCodeList = new ArrayList<>();
+        this.aspectCodeList = new HashSet<>();
     }
 
 
     @Override
-    public List<AspectEnum> getAspectCodeList() {
+    public Set<AspectEnum> getAspectCodes() {
         return aspectCodeList;
     }
 
     @Override
-    public void setAspectCodeList(List<AspectEnum> list){
+    public void setAspectCodes(Set<AspectEnum> list){
         this.aspectCodeList = list;
     }
 

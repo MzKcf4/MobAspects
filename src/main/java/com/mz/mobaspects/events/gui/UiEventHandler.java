@@ -13,6 +13,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public class UiEventHandler {
 
@@ -30,7 +31,7 @@ public class UiEventHandler {
 
         livingEntity.ifPresent(entity -> {
             entity.getCapability(AspectCapabilityProvider.ASPECT_CAPABILITY).ifPresent(aspectMob -> {
-                List<AspectEnum> aspectCodeList = aspectMob.getAspectCodeList();
+                Set<AspectEnum> aspectCodeList = aspectMob.getAspectCodes();
                 if(aspectCodeList.size() == 0){
                     return;
                 }

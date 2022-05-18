@@ -5,12 +5,13 @@ import com.mz.mobaspects.entity.AbstractAspectFollowerEntity;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 public interface IAspectMob {
 
-    List<AspectEnum> getAspectCodeList();
+    Set<AspectEnum> getAspectCodes();
 
-    void setAspectCodeList(List<AspectEnum> list);
+    void setAspectCodes(Set<AspectEnum> list);
 
     void addAspectFollower(AbstractAspectFollowerEntity followerEntity);
 

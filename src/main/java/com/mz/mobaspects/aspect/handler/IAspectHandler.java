@@ -29,7 +29,4 @@ public interface IAspectHandler {
 
     }
 
-    default void handleOnRceiveHitClient(LivingEntity attacker, LivingEntity victim ,float amount, DamageSource damageSource) {
-
-    }
 }

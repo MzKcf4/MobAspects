@@ -25,7 +25,7 @@ public class DamageTransferAspectHandler implements IAspectHandler {
             return;
         }
 
-        List<MobEntity> mobEntityList = Utils.findNearbyMobs((MobEntity) victim , victim.getEntityWorld() , range);
+        List<MobEntity> mobEntityList = Utils.findNearbyMobs(victim , victim.getEntityWorld() , range);
 
         float amountToTransfer = amount * transferPercent;
 
@@ -36,7 +36,7 @@ public class DamageTransferAspectHandler implements IAspectHandler {
             }
 
             boolean hasDamageTransfer = mob.getCapability(AspectCapabilityProvider.ASPECT_CAPABILITY)
-                    .map(IAspectMob::getAspectCodeList)
+                    .map(IAspectMob::getAspectCodes)
                     .filter(list -> list.contains(AspectEnum.DAMAGE_TRANSFER))
                     .isPresent();
 

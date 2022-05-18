@@ -1,5 +1,6 @@
 package com.mz.mobaspects.util;
 
+import com.mz.mobaspects.aspect.core.IAspectMob;
 import com.mz.mobaspects.capability.aspect.AspectCapabilityProvider;
 import com.mz.mobaspects.constants.AspectEnum;
 import com.mz.mobaspects.entity.AbstractAspectFollowerEntity;
@@ -20,7 +21,7 @@ import net.minecraftforge.fml.LogicalSidedProvider;
 import java.util.*;
 
 public class Utils {
-    private Utils() {};
+    private Utils() {}
 
     public static List<MobEntity> findNearbyMobs(Entity source , World world , float radius){
         AxisAlignedBB range = new AxisAlignedBB(source.getPosX() - radius, source.getPosY() - radius, source.getPosZ() - radius,
@@ -43,7 +44,11 @@ public class Utils {
     }
 
     public static boolean hasAspect(MobEntity mob , AspectEnum aspect){
-        return mob.getCapability(AspectCapabilityProvider.ASPECT_CAPABILITY).filter(iAspectMob -> iAspectMob.getAspectCodeList().contains(aspect)).isPresent();
+        return mob.getCapability(AspectCapabilityProvider.ASPECT_CAPABILITY).filter(iAspectMob -> iAspectMob.getAspectCodes().contains(aspect)).isPresent();
+    }
+
+    public static Set<AspectEnum> getAspects(LivingEntity entity){
+        return entity.getCapability(AspectCapabilityProvider.ASPECT_CAPABILITY).map(IAspectMob::getAspectCodes).orElse(new HashSet<>());
     }
 
     public static void queueFollowerEntitySpawn(World world , AbstractAspectFollowerEntity followerEntity , MobEntity ownerEntity){
@@ -51,9 +56,7 @@ public class Utils {
 
         executor.enqueue(new TickDelayedTask(0, () -> {
             world.addEntity(followerEntity);
-            ownerEntity.getCapability(AspectCapabilityProvider.ASPECT_CAPABILITY).ifPresent(extraInfo -> {
-                extraInfo.addAspectFollower(followerEntity);
-            });
+            ownerEntity.getCapability(AspectCapabilityProvider.ASPECT_CAPABILITY).ifPresent(extraInfo -> extraInfo.addAspectFollower(followerEntity));
         }));
     }
 
