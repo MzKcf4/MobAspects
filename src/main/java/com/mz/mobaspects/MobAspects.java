@@ -5,10 +5,7 @@ import com.mz.mobaspects.capability.CapabilityRegisterHelper;
 import com.mz.mobaspects.config.ServerConfig;
 import com.mz.mobaspects.entity.CustomEntityRegister;
 import com.mz.mobaspects.entity.ParasiteEntity;
-import com.mz.mobaspects.entity.renderer.GhastBuddyRenderer;
-import com.mz.mobaspects.entity.renderer.OverloadCrystalRenderer;
-import com.mz.mobaspects.entity.renderer.ParasiteRenderer;
-import com.mz.mobaspects.entity.renderer.TotemOfUndyingRenderer;
+import com.mz.mobaspects.entity.renderer.*;
 import com.mz.mobaspects.events.AspectEventHandler;
 import com.mz.mobaspects.events.gui.UiEventHandler;
 import com.mz.mobaspects.network.NetworkHandler;
@@ -78,6 +75,7 @@ public class MobAspects
         RenderingRegistry.registerEntityRenderingHandler(CustomEntityRegister.UNDYING_TOTEM.get(), TotemOfUndyingRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(CustomEntityRegister.OVERLOAD_CRYSTAL.get(), OverloadCrystalRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(CustomEntityRegister.ASPECT_PARASITE.get(), ParasiteRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(CustomEntityRegister.ASPECT_SHIELD.get(), AspectShieldRenderer::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)

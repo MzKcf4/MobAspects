@@ -39,6 +39,7 @@ public final class ServerConfig {
        allAspectList.add(new ParasiteAspect());
        allAspectList.add(new RiderAspect());
        allAspectList.add(new SirenAspect());
+       allAspectList.add(new ShieldingAspect());
        allAspectList.add(new StickyBombAspect());
        allAspectList.add(new StoicAspect());
        allAspectList.add(new SwapAspect());
@@ -46,6 +47,7 @@ public final class ServerConfig {
        allAspectList.add(new VampireAspect());
        allAspectList.add(new VengenanceAspect());
        allAspectList.add(new UndyingAuraAspect());
+
 
        BUILDER.push("mobaspects");
 

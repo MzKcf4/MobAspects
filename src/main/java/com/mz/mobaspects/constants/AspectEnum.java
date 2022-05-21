@@ -26,7 +26,8 @@ public enum AspectEnum {
     BERRY(19, "berry"),
     UNDYING_AURA(20, "undying_aura"),
     OVERLOAD(21,"overload"),
-    PARASITE(22,"parasite");
+    PARASITE(22,"parasite"),
+    SHIELDING(23,"shielding");
 
 
     private static final Map<Integer , AspectEnum> ID_TO_ENUM_MAP = new HashMap<>();

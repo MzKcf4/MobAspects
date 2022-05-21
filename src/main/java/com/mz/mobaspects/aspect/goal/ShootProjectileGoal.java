@@ -4,6 +4,7 @@ import com.mz.mobaspects.constants.ProjectileTypeEnum;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.projectile.FireballEntity;
+import net.minecraft.util.math.vector.Vector3d;
 
 public class ShootProjectileGoal extends UseAbilityGoal {
 
@@ -29,11 +30,5 @@ public class ShootProjectileGoal extends UseAbilityGoal {
         fireballentity.explosionPower = 0;
         fireballentity.setPosition(this.mobEntity.getPosX(), this.mobEntity.getPosYHeight(0.5D), fireballentity.getPosZ());
         mobEntity.world.addEntity(fireballentity);
-
-        /*
-        SmallFireballEntity smallfireballentity = new SmallFireballEntity(this.blaze.world, this.blaze, d1 + this.blaze.getRNG().nextGaussian() * (double)f, d2, d3 + this.blaze.getRNG().nextGaussian() * (double)f);
-        smallfireballentity.setPosition(smallfireballentity.getPosX(), this.blaze.getPosYHeight(0.5D) + 0.5D, smallfireballentity.getPosZ());
-        this.blaze.world.addEntity(smallfireballentity);
-        */
     }
 }

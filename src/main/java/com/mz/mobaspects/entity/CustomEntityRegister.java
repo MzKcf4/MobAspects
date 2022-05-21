@@ -40,4 +40,11 @@ public class  CustomEntityRegister {
                     .trackingRange(8)
                     .build(new ResourceLocation(MobAspects.MOD_ID, "aspect_parasite").toString())
     );
+
+    public static final RegistryObject<EntityType<AspectShieldEntity>> ASPECT_SHIELD = ENTITY_TYPES.register("aspect_shield", () ->
+            EntityType.Builder.<AspectShieldEntity>create(AspectShieldEntity::new, EntityClassification.MISC)
+                    .size(0.4F, 0.3F)
+                    .trackingRange(8)
+                    .build(new ResourceLocation(MobAspects.MOD_ID, "aspect_shield").toString())
+    );
 }

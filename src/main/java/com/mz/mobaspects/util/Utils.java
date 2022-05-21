@@ -13,6 +13,7 @@ import net.minecraft.util.concurrent.ThreadTaskExecutor;
 import net.minecraft.util.concurrent.TickDelayedTask;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.LogicalSidedProvider;
